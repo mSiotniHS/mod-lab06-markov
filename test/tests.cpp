@@ -6,7 +6,7 @@
 
 std::random_device rd;
 
-TEST(test, table_genrates_correclty) {
+TEST(test, table_generates_correctly) {
     TextGenerator generator(2, rd());
     generator.analyze("hello there my dear friend");
 
