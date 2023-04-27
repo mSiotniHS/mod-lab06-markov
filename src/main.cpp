@@ -1,3 +1,5 @@
+// Copyright 2023 mSiotniHS
+
 #include <iostream>
 #include <fstream>
 #include "textgen.h"

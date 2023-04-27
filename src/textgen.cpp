@@ -1,3 +1,5 @@
+// Copyright 2023 mSiotniHS
+
 #include <stdexcept>
 #include <iostream>
 #include "textgen.h"
@@ -33,10 +35,11 @@ void TextGenerator::analyze(const std::string& learningText) {
     std::string currentSuffix;
     bool isLastToken = false;
 
-    while (not isLastToken) {
+    while (!isLastToken) {
         if (currentPrefix.empty()) {
             for (size_t i = 0; i < prefixLength; i++) {
-                currentPrefix.push_back(nextToken(text, delimiter, isLastToken));
+                currentPrefix
+                    .push_back(nextToken(text, delimiter, isLastToken));
             }
         } else {
             currentPrefix.pop_front();
@@ -49,7 +52,9 @@ void TextGenerator::analyze(const std::string& learningText) {
     }
 }
 
-std::string TextGenerator::generateText(unsigned int wordCount, const prefix& startingPrefix) {
+std::string TextGenerator::generateText(
+        unsigned int wordCount,
+        const prefix& startingPrefix) {
     std::string text;
     prefix currentPrefix = startingPrefix;
 
@@ -72,6 +77,7 @@ std::string TextGenerator::generateText(unsigned int wordCount, const prefix& st
     return text;
 }
 
-const std::map<prefix, std::vector<std::string>>& TextGenerator::getPrefixSuffixTable() const {
+const std::map<prefix, std::vector<std::string>>&
+TextGenerator::getPrefixSuffixTable() const {
     return prefixSuffixTable;
 }

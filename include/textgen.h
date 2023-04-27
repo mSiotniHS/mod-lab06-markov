@@ -1,3 +1,5 @@
+// Copyright 2023 mSiotniHS
+
 #pragma once
 
 #include <string>
@@ -9,16 +11,19 @@
 typedef std::deque<std::string> prefix;
 
 class TextGenerator {
-  public:
+ public:
     TextGenerator(unsigned int prefixLength, unsigned int seed);
 
-    std::string generateText(unsigned int wordCount, const prefix& startingPrefix);
+    std::string generateText(
+            unsigned int wordCount,
+            const prefix& startingPrefix);
     void analyze(const std::string& learningText);
 
     [[nodiscard]]
-    const std::map<prefix, std::vector<std::string>>& getPrefixSuffixTable() const;
+    const std::map<prefix, std::vector<std::string>>&
+        getPrefixSuffixTable() const;
 
-  private:
+ private:
     std::map<prefix, std::vector<std::string>> prefixSuffixTable;
     unsigned int prefixLength;
     std::default_random_engine random;
