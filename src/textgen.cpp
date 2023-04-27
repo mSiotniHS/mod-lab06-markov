@@ -58,7 +58,7 @@ std::string TextGenerator::generateText(
     std::string text;
     prefix currentPrefix = startingPrefix;
 
-    for (size_t i = 0; i < wordCount; i++) {
+    for (size_t i = 0; i < wordCount - prefixLength; i++) {
         if (prefixSuffixTable.count(currentPrefix) == 0) break;
 
         auto suffixes = prefixSuffixTable[currentPrefix];
