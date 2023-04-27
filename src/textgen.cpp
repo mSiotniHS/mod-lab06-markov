@@ -9,6 +9,7 @@ TextGenerator::TextGenerator(unsigned int prefixLength, unsigned int seed)
     random(seed),
     prefixLength(prefixLength) {}
 
+// NOLINT
 std::string nextToken(std::string& text, char delimiter, bool& isLastToken) {
     size_t position;
     std::string token;
