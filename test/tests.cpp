@@ -28,6 +28,24 @@ TEST(test, table_generates_correctly) {
     ASSERT_THAT(table[testPrefix], ElementsAre("friend"));
 }
 
+TEST(test, table_generates_correctly_as_well) {
+    TextGenerator generator(2, rd());
+    generator.analyze("hello there foo hello there bar");
+
+    auto table = generator.getPrefixSuffixTable();
+
+    ASSERT_THAT(table.size(), Eq(3));
+
+    prefix testPrefix = {"hello", "there"};
+    ASSERT_THAT(table[testPrefix], ElementsAre("foo", "bar"));
+
+    testPrefix = {"there", "foo"};
+    ASSERT_THAT(table[testPrefix], ElementsAre("hello"));
+
+    testPrefix = {"foo", "hello"};
+    ASSERT_THAT(table[testPrefix], ElementsAre("there"));
+}
+
 TEST(test, single_suffix_is_handled_correctly) {
     TextGenerator generator(2, rd());
     generator.analyze("hello there my");
@@ -43,4 +61,19 @@ TEST(test, multiple_suffixes_are_handled_correctly) {
 
     ASSERT_THAT(text, AnyOf(
             Eq("hello there sweetie"), Eq("hello there darling")));
+}
+
+TEST(test, scenario) {
+    TextGenerator generator(2, rd());
+    generator.analyze(
+            "now this is just stupid yeah let me tell you "
+            "I mean this is not stupid yeah now this is great");
+    std::string text = generator.generateText(7, {"now", "this"});
+
+    ASSERT_THAT(text, AnyOf(
+            Eq("now this is great"),
+            Eq("now this is just stupid yeah let"),
+            Eq("now this is just stupid yeah now"),
+            Eq("now this is not stupid yeah let"),
+            Eq("now this is not stupid yeah now")));
 }
