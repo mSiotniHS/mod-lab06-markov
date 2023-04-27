@@ -2,9 +2,10 @@
 #include <iostream>
 #include "textgen.h"
 
-TextGenerator::TextGenerator(unsigned int prefixLength, unsigned int seed) : prefixSuffixTable(), random(seed) {
-    this->prefixLength = prefixLength;
-}
+TextGenerator::TextGenerator(unsigned int prefixLength, unsigned int seed)
+    : prefixSuffixTable(),
+    random(seed),
+    prefixLength(prefixLength) {}
 
 std::string nextToken(std::string& text, char delimiter, bool& isLastToken) {
     size_t position;
@@ -46,23 +47,10 @@ void TextGenerator::analyze(const std::string& learningText) {
 
         prefixSuffixTable[currentPrefix].push_back(currentSuffix);
     }
-
-    /*for (auto const& [key, value] : prefixSuffixTable) {
-        std::cout << '[';
-        for (auto const& prefix : key) {
-            std::cout << prefix << ", ";
-        }
-        std::cout << "] -> {";
-        for (auto const& oneOfSuffixes : value) {
-            std::cout << oneOfSuffixes << ", ";
-        }
-        std::cout << '}' << std::endl;
-    }*/
 }
 
 std::string TextGenerator::generateText(unsigned int wordCount, const prefix& startingPrefix) {
     std::string text;
-//    prefix currentPrefix = prefixSuffixTable.begin()->first;
     prefix currentPrefix = startingPrefix;
 
     for (size_t i = 0; i < wordCount; i++) {
