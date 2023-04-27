@@ -70,7 +70,10 @@ std::string TextGenerator::generateText(
     }
 
     while (!currentPrefix.empty()) {
-        text.append(currentPrefix.front() + ' ');
+        text.append(currentPrefix.front());
+        if (currentPrefix.size() != 1) {
+            text.append(" ");
+        }
         currentPrefix.pop_front();
     }
 
