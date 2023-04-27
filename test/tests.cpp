@@ -6,6 +6,7 @@
 
 using testing::Eq;
 using testing::ElementsAre;
+using testing::AnyOf;
 
 std::random_device rd;
 
@@ -25,4 +26,21 @@ TEST(test, table_generates_correctly) {
 
     testPrefix = {"my", "dear"};
     ASSERT_THAT(table[testPrefix], ElementsAre("friend"));
+}
+
+TEST(test, single_suffix_is_handled_correctly) {
+    TextGenerator generator(2, rd());
+    generator.analyze("hello there my");
+    std::string text = generator.generateText(3, {"hello", "there"});
+
+    ASSERT_THAT(text, Eq("hello there my"));
+}
+
+TEST(test, multiple_suffixes_are_handled_correctly) {
+    TextGenerator generator(2, rd());
+    generator.analyze("hello there sweetie hello there darling");
+    std::string text = generator.generateText(3, {"hello", "there"});
+
+    ASSERT_THAT(text, AnyOf(
+            Eq("hello there sweetie"), Eq("hello there darling")));
 }
