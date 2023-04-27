@@ -26,7 +26,7 @@ std::string nextToken(std::string& text, char delimiter, bool& isLastToken) { //
 }
 
 void TextGenerator::analyze(const std::string& learningText) {
-    this->prefixSuffixTable.clear();
+    prefixSuffixTable.clear();
     std::string text = learningText;
 
     const char delimiter = ' ';
