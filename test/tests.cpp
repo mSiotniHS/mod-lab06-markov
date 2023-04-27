@@ -1,8 +1,8 @@
 // Copyright 2021 GHA Test Team
 #include <gtest/gtest.h>
+#include <gmock/gmock-matchers.h>
 #include <random>
 #include "textgen.h"
-#include <gmock/gmock-matchers.h>
 
 std::random_device rd;
 
