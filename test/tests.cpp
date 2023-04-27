@@ -2,11 +2,9 @@
 #include <gtest/gtest.h>
 #include <random>
 #include "textgen.h"
-#include "gmock/gmock-matchers.h"
+#include <gmock/gmock-matchers.h>
 
 std::random_device rd;
-
-using namespace testing;
 
 TEST(test, table_genrates_correclty) {
     TextGenerator generator(2, rd());
@@ -14,9 +12,9 @@ TEST(test, table_genrates_correclty) {
 
     auto table = generator.getPrefixSuffixTable();
 
-    ASSERT_THAT(table.size(), Eq(3));
+    ASSERT_THAT(table.size(), testing::Eq(3));
 
     prefix testPrefix = {"hello", "there"};
 
-    ASSERT_THAT(table[testPrefix], ElementsAre("my"));
+    ASSERT_THAT(table[testPrefix], testing::ElementsAre("my"));
 }
