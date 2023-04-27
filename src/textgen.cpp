@@ -84,4 +84,6 @@ std::string TextGenerator::generateText(unsigned int wordCount, const prefix& st
     return text;
 }
 
-
+const std::map<prefix, std::vector<std::string>>& TextGenerator::getPrefixSuffixTable() const {
+    return prefixSuffixTable;
+}

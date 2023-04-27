@@ -15,6 +15,9 @@ class TextGenerator {
     std::string generateText(unsigned int wordCount, const prefix& startingPrefix);
     void analyze(const std::string& learningText);
 
+    [[nodiscard]]
+    const std::map<prefix, std::vector<std::string>>& getPrefixSuffixTable() const;
+
   private:
     std::map<prefix, std::vector<std::string>> prefixSuffixTable;
     unsigned int prefixLength;
